@@ -1,0 +1,91 @@
+food = {'hamburgers':1.99,'pizza':1.50,'fries':1.25,'soda':1}
+
+customer_order = {'hamburgers':0,'pizza':0,'fries':0,'soda':0}
+
+print('dear customer, what do you want today')
+
+
+
+def order_menu():
+
+  print(food)
+
+  food_name = input(('what do you want or exit\n'))
+
+  if food_name =='exit':
+
+    pass
+
+  else:
+
+    if food_name in food.keys():
+
+      print('we do have this one')
+
+    else:
+
+      print('we do not have this one')
+
+    food_number = int(input('how many do you want\n'))
+
+    customer_order[food_name] += food_number
+
+  continue_order = input('do you want continue order? yes or no\n')
+
+  if continue_order == 'yes':
+
+    print('dear customer,what else do you want\n')
+
+    order_menu()
+
+  else:
+
+    confirm_order = input('confirm your order? yes or no\n')
+
+    if confirm_order == 'no':
+
+      continue_or_delete = input('you want to continue or delete something,or cancel all?\nplease select from continue,delete,cancel\n')
+
+      if continue_or_delete == 'continue':
+
+        order_menu()
+
+      if continue_or_delete == 'delete':
+
+        print(food)
+
+        deleted_food = input('which one you want to delete?\n')
+
+        deleted_food_number = int(input('how many you want to delete?\n'))
+
+        if deleted_food_number <= customer_order[deleted_food]:
+
+          customer_order[deleted_food] -= deleted_food_number
+
+        else:
+
+          print('wrong input,we will delete all',deleted_food,'you ordered')
+
+      elif continue_or_delete == 'cancel':
+
+        for key in customer_order.items():
+
+          customer_order[key] = 0
+
+      order_menu()
+
+    else: 
+
+      total_price = 0
+
+      for key,value in food.items():
+
+        total_price += food.get(key) * customer_order.get(key)
+
+      print(customer_order)
+
+      print('total price:',total_price)
+
+
+
+order_menu()
